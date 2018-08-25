@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<title>Demo: Camera Access</title>
+
+	<style>
+		html,
+		body,
+		input,
+		select,
+		button {
+			font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+			font-size: 16px;
+		}
+
+		.input-area {
+			margin: 3rem 0;
+		}
+
+		label {
+			cursor: pointer;
+			border: 1px solid black;
+			border-radius: 23px;
+			font-weight: 500;
+			padding: 1rem 2rem;
+			background-color: rgb(210, 250, 250);
+		}
+
+		input {
+			width: 0.1px;
+			height: 0.1px;
+			opacity: 0;
+			overflow: hidden;
+			position: absolute;
+			z-index: -1;
+		}
+	</style>
+</head>
+
+<body>
+	<h1>Demo: Camera Access</h1>
+	<p>
+		A demo for accessing image files on a device, also allowing access to a camera if the device is a smartphone.
+	</p>
+
+	<p id="file-info">
+		This will output file information after you've picked/taken one or more images.
+	</p>
+
+	<div class="input-area">
+		<label for="file-input">Pick or take image(s)</label>
+		<input type="file" accept="image/*" id="file-input" multiple>
+	</div>
+
+	<h2>Additional resources</h2>
+	<ul>
+		<li>
+			<a href="https://developers.google.com/web/fundamentals/media/capturing-images/" rel="nofollow noopener">https://developers.google.com/web/fundamentals/media/capturing-images/</a>
+		</li>
+		<li>
+			<a href="https://tympanus.net/codrops/2015/09/15/styling-customizing-file-inputs-smart-way/" rel="nofollow noopener">https://tympanus.net/codrops/2015/09/15/styling-customizing-file-inputs-smart-way/</a>
+		</li>
+		<li>
+			<a href="http://anssiko.github.io/html-media-capture/" rel="nofollow noopener">http://anssiko.github.io/html-media-capture/
+				</>
+		</li>
+	</ul>
+
+	<script>
+		const fileInput = document.querySelector('#file-input');
+		fileInput.addEventListener('change', (e) => handleFiles(e.target.files));
+
+		function handleFiles(fileList) {
+			const paragraph = document.querySelector('#file-info');
+			const files = Object.values(fileList);
+
+			let imagesHtml = '';
+			files.forEach(file => {
+				imagesHtml += `<strong>Name</strong>: ${file.name} <strong>Size</strong>: ${file.size}<br>`;
+			});
+
+			paragraph.innerHTML = imagesHtml;
+		}
+	</script>
+</body>
+
+</html>
